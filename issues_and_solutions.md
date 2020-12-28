@@ -62,31 +62,56 @@ Solution is gotten from user *s-light* in thread [Linux on Asus Zenbook Pro Duo]
 Open the terminal and paste these commands. The first two lines configure that primary screen, while the last two configure the secondary screen.
 
 ```
-xinput map-to-output  "pointer:ELAN9008:00 04F3:29B6" eDP-1-1
-xinput map-to-output  "ELAN9008:00 04F3:29B6 Pen (0)" eDP-1-1
+xinput map-to-output  "pointer:ELAN9008:00 04F3:29B6" eDP-1
+xinput map-to-output  "ELAN9008:00 04F3:29B6 Pen (0)" eDP-1
 
-xinput map-to-output  "pointer:ELAN9009:00 04F3:29A1" DP-1-2
-xinput map-to-output  "ELAN9009:00 04F3:29A1 Pen (0)" DP-1-2
+xinput map-to-output  "pointer:ELAN9009:00 04F3:29A1" DP-2
+xinput map-to-output  "ELAN9009:00 04F3:29A1 Pen (0)" DP-2
 ```
 
-## Unresolved issues
+### Unable to control brightness on Screenpad and toggle it on and off
+It is not possible to control the Screenpad out of the box.
 
-### Sound only the first few seconds.
-It worked earlier, so I don't know what happened.
+#### Solution
+The solution is gotten from GitHub user *Plippo*. He has written a Windows Management Instrumentation (WMI) driver after reading the article [Writing a WMI driver - an introduction](https://lwn.net/Articles/391230/). If you check his comment [here](https://github.com/s-light/ASUS-ZenBook-Pro-Duo-UX581GV/issues/1) from May 25 2020, he describes the process he used to develop the driver.
 
-### Keyboard battery critically low
-According to [this question](https://askubuntu.com/questions/1190836/keyboard-battery-low-for-laptops-built-in-device), it seems like the keyboard is actually the touch screens.
+His end product is called the [asus-wmi-screenpad](https://github.com/Plippo/asus-wmi-screenpad) and instructions on how to install and use it is written in the README.md file.
 
-### Brightness control
-The default brightness keys do not work (only the GUI works).
+He has also written a simple script in his repository [screenpad-tools](https://github.com/Plippo/screenpad-tools) that allows for a more user friendly command line interface. By combining this script with keyboard shortcuts, you can easily change the brightness of the Screenpad and even toggle it on and off.
 
-#### Temporary fix
+I have used these shortcuts:
+* Brightness down: Win + F4
+* Brightness up: Win + F5
+* Toggle on/off: Launch7 (the same button used on Windows)
+
+> When placing the line `sudo chmod a+w '/sys/class/leds/asus::screenpad/brightness'` in your `/etc/rc.local` file, remember to make the file executable by running the command `sudo chmod +x /etc/rc.local` if it is not already executable.
+
+
+### Brightness controll on OLED screen
+Linux does not work out of the box for computers with OLED screens. The GUI elements are working though.
+
+#### Solution
+The solutions is to install the gnome extension [OLED Dimmer](https://extensions.gnome.org/extension/1222/oled-dimmer/). This extension will control both screens with the deafult key bindings. It also works with night light. The drawback is that the two screens cannot be controlled independently. However, with the Screenpad brightness solution it is possible to make the Screenpad darker than the main monitor but not vice versa.
+
+##### Temporary solution to controll independently
 A temporary fix is to use `xrandr` to manually change the brightness:
 
 ```
-xrandr --output eDP-1-1 --brightness 0.25
+xrandr --output eDP-1 --brightness 0.25
 ```
-Set the brightness value to whatever you desire.
+Set the brightness value to whatever you desire for the monitor (eDP-1 or DP-2) of your choice.
+
+## Unresolved issues
+
+### Touch (with fingers) not working after using stylus pen
+This happens after using the pen for a while. It also seems like this happens on the screen on which the pen is first used.
+
+### Sound only the first few seconds.
+It worked earlier, so I don't know what happened. It has not happened since.
+
+### Keyboard battery critically low
+According to [this question](https://askubuntu.com/questions/1190836/keyboard-battery-low-for-laptops-built-in-device), it seems like the keyboard is actually the touch screens.
+This happens one time on each screen after using the pen for the first time that session.
 
 ### Setting default monitor display
 I would like to not always have to configure the displays.
@@ -98,6 +123,8 @@ I would like to not always have to configure the displays.
 #### Netflix looses sound
 Booting Windows after having used Ubuntu results in Netflix placing the play symbol over the video which is playing, but with no sound. The quick fix is just to update the page. It happens only once, but after every time Ubuntu has been booted last. It's interesting as this happened on my previous laptop as well.
 
+#### The clock is one hour wrong
+This happens when i boot into Windows after using Ubuntu. It corrects itself after some time.
 
 ## Good to know
 
