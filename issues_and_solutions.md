@@ -68,6 +68,7 @@ xinput map-to-output  "ELAN9008:00 04F3:29B6 Pen (0)" eDP-1
 xinput map-to-output  "pointer:ELAN9009:00 04F3:29A1" DP-2
 xinput map-to-output  "ELAN9009:00 04F3:29A1 Pen (0)" DP-2
 ```
+However, the terminal gives the error `unable to find device 'ELAN9008:00 04F3:29B6' Pen (0)` if the pen is not used first.
 
 ### Unable to control brightness on Screenpad and toggle it on and off
 It is not possible to control the Screenpad out of the box.
@@ -87,13 +88,13 @@ I have used these shortcuts:
 > When placing the line `sudo chmod a+w '/sys/class/leds/asus::screenpad/brightness'` in your `/etc/rc.local` file, remember to make the file executable by running the command `sudo chmod +x /etc/rc.local` if it is not already executable.
 
 
-### Brightness controll on OLED screen
+### Brightness control on OLED screen
 Linux does not work out of the box for computers with OLED screens. The GUI elements are working though.
 
 #### Solution
 The solutions is to install the gnome extension [OLED Dimmer](https://extensions.gnome.org/extension/1222/oled-dimmer/). This extension will control both screens with the deafult key bindings. It also works with night light. The drawback is that the two screens cannot be controlled independently. However, with the Screenpad brightness solution it is possible to make the Screenpad darker than the main monitor but not vice versa.
 
-##### Temporary solution to controll independently
+##### Temporary solution to control independently
 A temporary fix is to use `xrandr` to manually change the brightness:
 
 ```
@@ -107,7 +108,7 @@ Set the brightness value to whatever you desire for the monitor (eDP-1 or DP-2) 
 This happens after using the pen for a while. It also seems like this happens on the screen on which the pen is first used.
 
 ### Sound only the first few seconds.
-It worked earlier, so I don't know what happened. It has not happened since.
+It worked earlier, so I don't know what happened. It has happened once after installing the OLED dimmer.
 
 ### Keyboard battery critically low
 According to [this question](https://askubuntu.com/questions/1190836/keyboard-battery-low-for-laptops-built-in-device), it seems like the keyboard is actually the touch screens.
