@@ -15,3 +15,6 @@ When dowloading with snap, the Spotify desktop file is found in folder `/var/lib
 
 The explanation for how to make Spotify the default music player is found [here](https://askubuntu.com/questions/95345/how-to-make-spotify-the-default-music-player).
 The answer to where the Spotify desktop file is located when installing with snap is found [here](https://askubuntu.com/questions/1043345/media-shortcuts-no-longer-work-after-installing-a-different-version-of-spotify-a).
+
+## Workspaces and multiple monitors
+By installing **Tweaks** you can choose to have workspaces that span only the primary display, or have workspaces that span both displays. Link [here](https://www.thegygers.com/2020/07/30/ubuntu-20-04-workspaces-and-multiple-monitors/). 
