@@ -6,4 +6,4 @@ The first thing I did was to watch the videos [50](https://www.youtube.com/watch
 Install the [OLED Dimmer](https://extensions.gnome.org/extension/1222/oled-dimmer/) extension to be able to control the brightness of the screens with the default key bindings.
 
 ## Facial recognition
-Install **Howdy** as explained [here](https://tech.davidfield.co.uk/unlock-ubuntu-using-your-face/) to be able to log in to your computer, unlock lock screen and obtain `sudo` access in the terminal using facial recognition instead of your password. 
+Install **Howdy** as explained [here](https://tech.davidfield.co.uk/unlock-ubuntu-using-your-face/) to be able to log in to your computer, unlock lock screen and obtain `sudo` access in the terminal using facial recognition instead of your password.
